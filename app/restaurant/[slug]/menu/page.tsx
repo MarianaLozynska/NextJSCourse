@@ -1,5 +1,3 @@
-import NavBar from "../../../components/NavBar";
-import Header from "../components/Header";
 import Menu from "../components/Menu";
 import RestaurantNavBar from "../components/RestaurantNavBar";
 
