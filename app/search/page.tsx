@@ -29,23 +29,37 @@ const fetchRestaurantsByCity = (city: string | undefined) => {
   });
 };
 
+const fetchLocations = async () => {
+  return prisma.location.findMany();
+};
+
+const fetchCuisines = async () => {
+  return prisma.cuisine.findMany();
+};
+
 export default async function Search({
   searchParams,
 }: {
-  searchParams: { city: string };
+  searchParams: { city?: string; price?: PRICE; cuisine?: string };
 }) {
   const restaurants = await fetchRestaurantsByCity(searchParams.city);
-  console.log(restaurants);
+  const location = await fetchLocations();
+  const cuisine = await fetchCuisines();
+  // console.log(restaurants);
   return (
     <>
       <Header />
       <div className="flex py-4 m-auto w-2/3 justify-between items-start">
-        <SearchSideBar />
+        <SearchSideBar
+          locations={location}
+          cuisines={cuisine}
+          searchParams={searchParams}
+        />
         <div className="w-5/6">
           {restaurants.length ? (
             <>
               {restaurants.map((restaurant) => (
-                <RestaurantCard restaurant={restaurant} />
+                <RestaurantCard restaurant={restaurant} key={restaurant.id} />
               ))}
             </>
           ) : (
