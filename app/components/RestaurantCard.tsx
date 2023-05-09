@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function RestaurantCard({ restaurant }: Props) {
-  console.log("REVIEWS", restaurant.reviews.length);
+  // console.log("REVIEWS", restaurant.reviews.length);
   return (
     <div className="w-64 h-72 m-3 rounded overflow-hidden border cursor-pointer">
       <Link href={`/restaurant/${restaurant.slug}`}>
